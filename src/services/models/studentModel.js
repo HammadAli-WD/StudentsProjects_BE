@@ -23,18 +23,23 @@ const studentSchema = new Schema({
   },
   surname: {
     type: String,
-    required: true,
+    //required: true,
+  },
+  img: {
+    type: Buffer,
+    //contentType: String
+    //required: true,
   },
   email: {
     type: String,
-    required: true,
+    //required: true,
     lowercase: true,
-    validate : {
+    validate: {
       validator: async (value) => {
-        if(!v.isEmail(value)) {
+        if (!v.isEmail(value)) {
           throw new Error("The provided information is not an email")
         } else {
-          const checkEmail = await studentModel.findOne({ email : value})
+          const checkEmail = await studentModel.findOne({ email: value })
           if (checkEmail) {
             throw new Error("Email already exists")
           }
@@ -54,9 +59,9 @@ const studentSchema = new Schema({
   },
   country: {
     type: String,
-    required: true,
+    ///required: true,
   },
-  
+
   /* [{
     type: mongoose.Schema.Types.ObjectId, ref:'project' ,
     
@@ -65,9 +70,9 @@ const studentSchema = new Schema({
 
 const studentModel = mongoose.model("student", studentSchema)
 
-studentSchema.path('name').validate(function(n) {
+studentSchema.path('name').validate(function (n) {
   return !!n && n.length >= 3 && n.length < 10;
 }, 'Invalid Name');
 
 
-module.exports = {studentModel, studentSchema}
+module.exports = { studentModel, studentSchema }
